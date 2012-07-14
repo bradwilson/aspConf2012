@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -12,11 +13,14 @@ namespace WebApiTimeout.Controllers
 
         public async Task<IEnumerable<int>> GetRandomNumbers(CancellationToken token, int count = 5)
         {
-            List<int> results = new List<int>(count);
+            List<Task<int>> resultTasks = new List<Task<int>>(count);
 
             for (int i = 0; i < count; ++i)
-                results.Add(await _service.GetRandomNumber(token));
+                resultTasks.Add(_service.GetRandomNumber(token));
 
+            await Task.WhenAll(resultTasks.ToArray());
+
+            IEnumerable<int> results = resultTasks.Select(task => task.Result);
             return results;
         }
     }

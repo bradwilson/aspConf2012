@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebApiTimeout.Services
@@ -7,9 +8,9 @@ namespace WebApiTimeout.Services
     {
         private Random _random = new Random();
 
-        public async Task<int> GetRandomNumber()
+        public async Task<int> GetRandomNumber(CancellationToken token)
         {
-            await Task.Delay(1000);
+            await Task.Delay(1000, token);
             return _random.Next();
         }
     }

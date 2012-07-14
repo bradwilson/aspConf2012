@@ -12,6 +12,7 @@ namespace WebApiTimeout
             var config = new HttpSelfHostConfiguration("http://localhost:8181");
 
             config.MessageHandlers.Add(new LoggingHandler());
+            config.MessageHandlers.Add(new TimeoutHandler());
 
             config.Routes.MapHttpRoute(
                 "default",

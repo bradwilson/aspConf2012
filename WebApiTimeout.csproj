@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Controllers\RandomController.cs" />
     <Compile Include="Handlers\LoggingHandler.cs" />
+    <Compile Include="Handlers\TimeoutHandler.cs" />
     <Compile Include="Services\RandomNumberService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
